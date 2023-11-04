@@ -14,7 +14,7 @@ class Game:
         self.world = World(self.screen.get_width(), self.screen.get_height())
         self.start_game()
         self.last_spawn_time = 0
-        self.spawn_interval = 3000  # Time in milliseconds
+        self.spawn_interval = 2000  # Time in milliseconds
         self.spawn_food()
         self.score = 0
 

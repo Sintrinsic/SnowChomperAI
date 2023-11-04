@@ -44,13 +44,10 @@ class Player(PhysicsObject):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
                 self.thrust()
-                print("thrusting")
             if event.key == pygame.K_a:
                 self.rotate_left()
-                print("turning left_")
             if event.key == pygame.K_d:
                 self.rotate_right()
-                print("turning right")
 
     def update(self):
         super().update()
