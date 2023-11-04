@@ -42,14 +42,48 @@ class Game:
 
 
     def draw(self):
-        self.screen.fill((0, 0, 128))  # Fill the screen with a blue color (like water)
+        self.screen.fill((54, 106, 130))  # Fill the screen with a blue color (like water)
         self.world.draw(self.screen)
         self.food.draw(self.screen)
         self.player.draw(self.screen)
+        self.draw_bars()  # Draw the energy and health bars
 
         pygame.display.flip()  # Update the full display surface to the screen
 
+    # Assuming this is within the Game class
 
+    def draw_bars(self):
+        # Define colors
+        green_variant = (137, 208, 238)  # A darker shade of green for energy
+        red_variant = (128, 0, 0)  # A darker shade of red for health
+        box_border_color = (221, 243, 254)  # Light blue from your player color
+
+        # Define bar properties
+        bar_width = 200
+        bar_height = 20
+        spacing = 10
+        border_thickness = 3
+
+        # Calculate the energy and health as a percentage
+        energy_percentage = self.player.energy / 100.0
+        health_percentage = self.player.health / 100.0
+
+        # Define positions
+        box_x, box_y = 10, 10  # Upper left corner
+
+        # Draw the grouping box
+        total_box_height = (2 * bar_height) + (3 * spacing)
+        pygame.draw.rect(self.screen, box_border_color, (box_x, box_y, bar_width + (spacing * 2), total_box_height),
+                         border_thickness)
+
+        # Draw the energy bar
+        energy_bar_rect = (box_x + spacing, box_y + spacing, bar_width * energy_percentage, bar_height)
+        pygame.draw.rect(self.screen, green_variant, energy_bar_rect)
+
+        # Draw the health bar below the energy bar
+        health_bar_rect = (
+        box_x + spacing, box_y + (2 * spacing) + bar_height, bar_width * health_percentage, bar_height)
+        pygame.draw.rect(self.screen, red_variant, health_bar_rect)
 
     def spawn_food(self):
         new_food = Food()

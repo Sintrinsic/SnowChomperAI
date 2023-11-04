@@ -7,7 +7,7 @@ class PhysicsObject(pygame.sprite.Sprite):
     def __init__(self, x, y,  world, mass=1.0):
         super().__init__()
         self.world = world
-        self.angle = 0
+        self.angle = 180
         self.position = Vector2D(x, y)
         self.velocity = Vector2D(0,0)
         self.gravity = Vector2D(0, 0.1)  # The force of gravity as a vector

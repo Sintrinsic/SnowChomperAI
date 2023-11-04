@@ -6,7 +6,7 @@ class World:
         self.height = height
         self.ground_height = ground_height
         self.ground_level = self.height - self.ground_height
-        self.ground_color = (139, 69, 19)  # A color that might represent the ocean floor, brownish.
+        self.ground_color = (52, 54, 49)  # A color that might represent the ocean floor, brownish.
 
 
     def draw(self, screen):

@@ -8,7 +8,9 @@ class Player(PhysicsObject):
     def __init__(self, x, y, world, radius=10, mass=1.0):
         super().__init__(x, y, world, mass)
         self.radius = radius
+        self.color = (221, 243, 254)
         self.energy = 100
+        self.health = 100
         self.thrust_strength = 5
         self.rotation_speed = 30  # degrees per frame
 
@@ -30,12 +32,12 @@ class Player(PhysicsObject):
 
     def draw(self, screen):
         # Draw the player as a circle
-        pygame.draw.circle(screen, (0, 255, 0), (int(self.position.x), int(self.position.y)), self.radius)
+        pygame.draw.circle(screen, self.color, (int(self.position.x), int(self.position.y)), self.radius)
 
         # Draw the direction line
         direction_vector = self.get_normalized_direction_vector()
         line_end = self.position + direction_vector * self.radius
-        pygame.draw.line(screen, (255, 0, 0), (self.position.x, self.position.y), (line_end.x, line_end.y), 2)
+        pygame.draw.line(screen, (0, 0, 0), (self.position.x, self.position.y), (line_end.x, line_end.y), 2)
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
@@ -51,3 +53,5 @@ class Player(PhysicsObject):
 
     def update(self):
         super().update()
+        if self.energy == 0 :
+            self.health -= .1
