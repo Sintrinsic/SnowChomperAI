@@ -4,10 +4,11 @@ from vector2d import Vector2D
 import math
 
 class PhysicsObject(pygame.sprite.Sprite):
-    def __init__(self, x, y,  world, mass=1.0):
+    def __init__(self, x, y,  world, radius, mass=1.0):
         super().__init__()
         self.world = world
         self.angle = 180
+        self.radius = radius
         self.position = Vector2D(x, y)
         self.velocity = Vector2D(0,0)
         self.gravity = Vector2D(0, 0.1)  # The force of gravity as a vector
@@ -40,9 +41,12 @@ class PhysicsObject(pygame.sprite.Sprite):
         return new_vector
 
 
-
     def collide_with_object(self, other_object):
-        pass
+        # Calculate the distance between the centers of the two objects
+        distance = self.position.distance_to(other_object.position)
+
+        # Check if the distance is less than the sum of the radii
+        return distance < (self.radius + other_object.radius)
 
     def set_velocity(self, velocity):
         self.velocity = velocity

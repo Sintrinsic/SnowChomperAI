@@ -49,6 +49,9 @@ class Vector2D:
             self.x /= length
             self.y /= length
 
+    def distance_to(self, other):
+        """Calculate the distance between two vectors."""
+        return math.sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2)
     @staticmethod
     def from_angle(angle, magnitude=1):
         radian = math.radians(angle)

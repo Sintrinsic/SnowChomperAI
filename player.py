@@ -6,11 +6,12 @@ import math
 
 class Player(PhysicsObject):
     def __init__(self, x, y, world, radius=10, mass=1.0):
-        super().__init__(x, y, world, mass)
-        self.radius = radius
+        super().__init__(x, y, world, mass, radius)
+        self.world = world
         self.color = (221, 243, 254)
         self.energy = 100
         self.health = 100
+        self.radius = radius
         self.thrust_strength = 5
         self.rotation_speed = 30  # degrees per frame
 
@@ -53,5 +54,15 @@ class Player(PhysicsObject):
 
     def update(self):
         super().update()
-        if self.energy == 0 :
+
+        if self.energy > 0:
+            self.energy -= .05
+            if self.health < 100:
+                self.health += .05
+                self.energy -= .05
+
+        if self.energy <= 0 :
+            self.energy = 0
             self.health -= .1
+
+
